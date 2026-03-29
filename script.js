@@ -3,9 +3,9 @@ const { spawn, exec } = require('child_process');
 const { shell } = require('electron'); // Pour ouvrir le navigateur vers GitHub
 
 // --- CONSTANTES & VARIABLES SYSTÈME ---
-const APP_VERSION = "2.0.0"; // La version de ton app (à changer à chaque maj)
-const GITHUB_OWNER = "mechkilla"; // ⚠️ À MODIFIER
-const GITHUB_REPO = "simple_spoofer";       // ⚠️ À MODIFIER
+const APP_VERSION = "2.5.0"; // La version de ton app
+const GITHUB_OWNER = "French-Studio-Network"; // Ton Organisation / Compte
+const GITHUB_REPO = "simple_spoofer";         // Ton Repo
 
 let tunnelProcess = null;
 let iphoneIP = null;
@@ -54,10 +54,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const speedSliderJoy = document.getElementById('speedSliderJoy');
     const speedValueJoy = document.getElementById('speedValueJoy');
 
-    const updateModal = document.getElementById('updateModal');
-    const btnDownloadUpdate = document.getElementById('btnDownloadUpdate');
-    const btnCloseUpdate = document.getElementById('btnCloseUpdate');
-
     function logMsg(msg, color="white") {
         terminal.innerHTML += `<br><span class="terminal-prefix">></span> <span style="color:${color}">${msg}</span>`;
         terminal.scrollTop = terminal.scrollHeight;
@@ -76,14 +72,21 @@ document.addEventListener("DOMContentLoaded", () => {
     routeLine = L.polyline([], {color: '#c5a059', weight: 5, opacity: 0.8}).addTo(map);
     setTimeout(() => { map.invalidateSize(); }, 500);
     renderFavorites();
-
-    // --- MOTEUR 1 : CONNEXION ---
+// --- MOTEUR 1 : CONNEXION ---
     btnConnect.addEventListener('click', () => {
         btnConnect.disabled = true;
         btnConnect.innerText = "⏳ Analyse USB...";
         logMsg("Démarrage du tunnel sécurisé...", "yellow");
 
-        tunnelProcess = spawn('python', ['-u', '-m', 'pymobiledevice3', 'remote', 'tunneld']);
+        // LE FIX EST ICI : On ajoute { shell: true } pour que le .exe trouve Python sur Windows
+        tunnelProcess = spawn('python', ['-u', '-m', 'pymobiledevice3', 'remote', 'tunneld'], { shell: true });
+
+        // Si le .exe ne trouve vraiment pas Python, il nous prévient au lieu de freezer
+        tunnelProcess.on('error', (err) => {
+            logMsg(`❌ Erreur fatale : Python introuvable par le système.`, "red");
+            btnConnect.disabled = false;
+            btnConnect.innerText = "🔌 Réessayer";
+        });
 
         function handleTunnelOutput(data) {
             const output = data.toString();
@@ -191,7 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
         else if (currentMode === 'joystick') {
-            // En mode joystick, un clic téléporte aussi (pratique pour se placer avant de marcher)
+            // En mode joystick, un clic téléporte aussi
             currentLat = e.latlng.lat;
             currentLon = e.latlng.lng;
             marker.setLatLng(e.latlng);
@@ -373,9 +376,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // --- MOTEUR 7 : CHECKER DE MISE À JOUR GITHUB ---
+    // --- MOTEUR 7 : CHECKER DE MISE À JOUR (NATIF) ---
     async function checkForUpdates() {
-        logMsg("Vérification des serveurs French-Studio...", "gray");
+        logMsg("Vérification des mises à jour...", "gray");
         try {
             const response = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/releases/latest`);
             if (!response.ok) throw new Error("Aucune release trouvée");
@@ -385,25 +388,26 @@ document.addEventListener("DOMContentLoaded", () => {
             
             if (serverVersion !== APP_VERSION) {
                 logMsg(`✨ Mise à jour v${serverVersion} disponible sur GitHub !`, "var(--fs-accent-gold)");
-                document.getElementById('newVersionNumber').innerText = "v" + serverVersion;
-                latestReleaseUrl = data.html_url; 
-                if (updateModal) updateModal.style.display = 'flex'; 
+                
+                // Demande de mise à jour native Windows/Mac !
+                const userWantsUpdate = confirm(`🚀 NOUVELLE MISE À JOUR DISPONIBLE !\n\nLa version v${serverVersion} de Simple Spoofer est en ligne.\nVoulez-vous la télécharger maintenant ?`);
+                
+                if (userWantsUpdate) {
+                    logMsg("Ouverture de la page de téléchargement...", "yellow");
+                    shell.openExternal(data.html_url); 
+                } else {
+                    logMsg("Mise à jour ignorée pour le moment.", "gray");
+                }
             } else {
-                logMsg("✔️ French-Studio est à la dernière version.", "#2ecc71");
+                logMsg("✔️ Simple Spoofer est à la dernière version.", "#2ecc71");
             }
         } catch (error) {
             logMsg("⚠️ Serveur de mise à jour injoignable.", "gray");
         }
     }
 
-    if (updateModal) {
-        setTimeout(checkForUpdates, 2000); 
-        btnCloseUpdate.addEventListener('click', () => { updateModal.style.display = 'none'; });
-        btnDownloadUpdate.addEventListener('click', () => {
-            if (latestReleaseUrl) shell.openExternal(latestReleaseUrl); 
-            updateModal.style.display = 'none';
-        });
-    }
+    // Lance le check 2 secondes après démarrage
+    setTimeout(checkForUpdates, 2000);
 
     // --- MOTEUR 8 : JOYSTICK CLAVIER ---
     const METERS_PER_DEGREE_LAT = 111320; 
