@@ -49,7 +49,7 @@ Avant d'utiliser Simple Spoofer, assurez-vous d'avoir les éléments suivants in
 ### Option B : Lancer depuis le code source (Pour les développeurs)
 1. Clonez ce dépôt :
    ```bash
-   git clone [https://github.com/mechkilla/simple_spoofer.git](https://github.com/mechkilla/simple_spoofer.git)
+   git clone [https://github.com/French-Studio-Network/simple_spoofer.git](https://github.com/French-Studio-Network/simple_spoofer.git)
 
    Rendez-vous dans le dossier :
    
