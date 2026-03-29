@@ -1,0 +1,449 @@
+/* SIMPLE SPOOFER - Design System by French-Studio
+   Palette : Bleu Roi, Or Subtil, Gris Anthracite, Blanc Pur
+*/
+
+:root {
+    /* Couleurs Principales French-Studio */
+    --fs-bg-dark: #121212;         /* Fond général très sombre */
+    --fs-bg-panel: #1e1e1e;        /* Fond des panneaux légèrement plus clair */
+    --fs-accent-blue: #0056b3;     /* Bleu Roi pour l'action principale */
+    --fs-accent-blue-hover: #004494; /* Bleu plus sombre au survol */
+    --fs-accent-gold: #c5a059;     /* Or subtil pour les détails de marque */
+    
+    /* Couleurs de Texte */
+    --fs-text-main: #ffffff;       /* Texte principal blanc */
+    --fs-text-muted: #999999;     /* Texte secondaire gris */
+    
+    /* Autres */
+    --fs-border: #333333;          /* Couleur des bordures */
+    --fs-shadow: 0 4px 15px rgba(0,0,0,0.6); /* Ombre portée douce */
+}
+
+/* Reset de base */
+* { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+}
+
+body { 
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Police clean et moderne */
+    background-color: var(--fs-bg-dark); 
+    color: var(--fs-text-main); 
+    height: 100vh; 
+    display: flex; 
+    overflow: hidden; 
+    -webkit-font-smoothing: antialiased; /* Rendu de police plus net sur Mac */
+}
+
+/* --- BARRE LATÉRALE (Sidebar) --- */
+#sidebar { 
+    width: 320px; 
+    background: var(--fs-bg-dark); 
+    display: flex; 
+    flex-direction: column; 
+    border-right: 1px solid var(--fs-border); 
+    z-index: 10; 
+    box-shadow: 5px 0 15px rgba(0,0,0,0.5); 
+}
+
+/* En-tête de la Sidebar (Logo + Marque) */
+.header { 
+    padding: 30px 20px; 
+    border-bottom: 1px solid var(--fs-border); 
+    text-align: center;
+}
+
+.header h1 { 
+    font-size: 24px; 
+    font-weight: 700; 
+    letter-spacing: 1.5px; 
+    text-transform: uppercase;
+    color: var(--fs-text-main);
+}
+
+.header h1 span {
+    color: var(--fs-accent-gold); /* 'SPOOFER' en Or */
+}
+
+.header p { 
+    font-size: 11px; 
+    color: var(--fs-accent-blue); /* 'French-Studio' en Bleu */
+    margin-top: 8px; 
+    font-weight: 600; 
+    text-transform: uppercase; 
+    letter-spacing: 3px;
+}
+
+/* Zone des contrôles */
+.controls { 
+    padding: 25px 20px; 
+    flex-grow: 1; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 18px; 
+}
+
+/* --- BOUTONS MODERNES --- */
+.btn { 
+    display: block; 
+    width: 100%; 
+    background: var(--fs-accent-blue); 
+    color: white; 
+    border: none; 
+    padding: 15px; 
+    border-radius: 4px; /* Bordures légèrement arrondies, plus pro */
+    font-size: 14px; 
+    font-weight: 600; 
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer; 
+    transition: all 0.3s ease; 
+    box-shadow: 0 4px 6px rgba(0, 86, 179, 0.3);
+    outline: none;
+}
+
+.btn:hover { 
+    background: var(--fs-accent-blue-hover); 
+    transform: translateY(-1px); 
+    box-shadow: 0 6px 12px rgba(0, 86, 179, 0.4);
+}
+
+.btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 86, 179, 0.3);
+}
+
+/* Bouton Rouge (Reset) */
+.btn-red { 
+    background: #a52a2a; /* Rouge bordeaux plus discret */
+    box-shadow: 0 4px 6px rgba(165, 42, 42, 0.3); 
+}
+
+.btn-red:hover { 
+    background: #8b0000; 
+    box-shadow: 0 6px 12px rgba(165, 42, 42, 0.4);
+}
+
+/* --- PANNEAU DE VITESSE --- */
+.panel { 
+    background: var(--fs-bg-panel); 
+    padding: 18px; 
+    border-radius: 4px; 
+    border: 1px solid var(--fs-border); 
+}
+
+.panel label { 
+    font-size: 11px; 
+    color: var(--fs-accent-gold); /* Label en Or */
+    margin-bottom: 10px; 
+    display: block; 
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.panel select { 
+    width: 100%; 
+    background: #111; 
+    color: white; 
+    border: 1px solid #444; 
+    padding: 12px; 
+    border-radius: 2px; 
+    outline: none; 
+    font-size: 13px; 
+    appearance: none; /* Cache la flèche par défaut */
+    -webkit-appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23999999%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095.1c3.6-3.6%205.4-7.8%205.4-12.8%200-5-1.8-9.3-5.4-12.9z%22%2F%3E%3C%2Fsvg%22>');
+    background-repeat: no-repeat, repeat;
+    background-position: right 12px top 50%, 0 0;
+    background-size: 10px auto, 100%;
+}
+
+/* --- TERMINAL "HACKER" STYLE FS --- */
+.terminal { 
+    background: #0a0a0a; 
+    color: #00ff00; /* Garde le vert 'console' */
+    font-family: 'Courier New', Courier, monospace; /* Police monospace classique */
+    font-size: 12px; 
+    padding: 15px; 
+    border-radius: 2px; 
+    flex-grow: 1; 
+    overflow-y: auto; 
+    border: 1px solid #222; 
+    margin-top: auto; 
+    max-height: 180px; 
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
+}
+
+.terminal-prefix {
+    color: var(--fs-accent-gold); /* Préfixe '>' en Or */
+}
+
+/* --- ZONE CARTE & RECHERCHE --- */
+#map-container { 
+    flex-grow: 1; 
+    position: relative; 
+    height: 100vh; 
+    background: #1a1a1a; 
+}
+
+#map { 
+    width: 100%; 
+    height: 100%; 
+    z-index: 1; 
+}
+
+/* Barre de recherche flottante */
+.search-box { 
+    position: absolute; 
+    top: 25px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    z-index: 1000; 
+    background: rgba(20, 20, 20, 0.9); /* Plus sombre et opaque */
+    backdrop-filter: blur(8px);
+    border-radius: 2px; /* Carré comme FS */
+    display: flex; 
+    padding: 2px 10px; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.7); 
+    border: 1px solid var(--fs-border); 
+    width: 480px; 
+    transition: all 0.3s ease;
+}
+
+.search-box:focus-within {
+    border-color: var(--fs-accent-blue);
+    box-shadow: 0 10px 30px rgba(0, 86, 179, 0.4);
+}
+
+.search-box input { 
+    background: transparent; 
+    border: none; 
+    color: white; 
+    padding: 14px; 
+    width: 100%; 
+    outline: none; 
+    font-size: 14px; 
+    font-family: inherit; 
+}
+
+.search-box input::placeholder {
+    color: #666;
+}
+
+.search-box button { 
+    background: transparent; 
+    border: none; 
+    color: var(--fs-text-muted); 
+    cursor: pointer; 
+    padding: 0 12px; 
+    font-size: 18px; 
+    transition: color 0.2s ease;
+}
+
+.search-box button:hover { 
+    color: var(--fs-accent-gold); /* Icône loupe en Or au survol */
+}
+
+/* --- MARQUEUR GPS "POINT BLEU" FRENCH-STUDIO --- */
+.gps-marker {
+    background-color: var(--fs-accent-blue); /* Bleu FS */
+    width: 20px; 
+    height: 20px;
+    border-radius: 50%; 
+    border: 3px solid white;
+    box-shadow: 0 0 20px rgba(0, 86, 179, 0.9);
+    position: relative;
+}
+
+/* Effet de halo pulsant */
+.gps-marker::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: rgba(0, 86, 179, 0.5);
+    animation: fs-pulse 2.5s infinite;
+    z-index: -1;
+}
+
+@keyframes fs-pulse { 
+    0% { 
+        width: 100%;
+        height: 100%;
+        opacity: 0.8;
+    } 
+    100% { 
+        width: 350%;
+        height: 350%;
+        opacity: 0;
+    } 
+}
+
+/* Personnalisation des contrôles de zoom Leaflet */
+.leaflet-control-zoom-in, .leaflet-control-zoom-out {
+    background-color: var(--fs-bg-panel) !important;
+    color: var(--fs-text-main) !important;
+    border: 1px solid var(--fs-border) !important;
+    border-radius: 2px !important;
+}
+
+.leaflet-control-zoom-in:hover, .leaflet-control-zoom-out:hover {
+    background-color: var(--fs-accent-blue) !important;
+    color: white !important;
+}
+
+/* --- SÉLECTEUR DE MODE --- */
+.mode-selector {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 5px;
+}
+
+.btn-mode {
+    flex: 1;
+    background: #222;
+    color: var(--fs-text-muted);
+    border: 1px solid #444;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-mode.active {
+    background: var(--fs-accent-blue);
+    color: white;
+    border-color: var(--fs-accent-blue);
+    box-shadow: 0 0 10px rgba(0, 86, 179, 0.5);
+}
+
+/* --- FAVORIS --- */
+.favorites-list {
+    max-height: 120px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.fav-item {
+    background: #111;
+    color: white;
+    border: 1px solid #333;
+    padding: 8px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    transition: background 0.2s;
+}
+
+.fav-item:hover {
+    background: #222;
+    border-color: var(--fs-accent-gold);
+}
+
+.fav-delete {
+    color: #e74c3c;
+    font-weight: bold;
+}
+.fav-delete:hover {
+    color: #ff6b6b;
+}
+
+/* --- JAUGE DE VITESSE (Slider FS) --- */
+.slider-container {
+    padding: 10px 0 15px 0;
+}
+
+.fs-slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 6px;
+    background: #333;
+    border-radius: 5px;
+    outline: none;
+    transition: background 0.3s;
+}
+
+.fs-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--fs-accent-gold);
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(197, 160, 89, 0.6);
+    transition: transform 0.1s;
+}
+
+.fs-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    background: #d4af37;
+}
+
+/* --- POP-UP DE MISE À JOUR --- */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+    background: var(--fs-bg-panel);
+    border: 1px solid var(--fs-accent-gold);
+    border-radius: 8px;
+    padding: 30px;
+    width: 400px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.8);
+    text-align: center;
+}
+
+.modal-content h2 {
+    color: white;
+    font-size: 20px;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.release-notes {
+    background: #111;
+    border: 1px solid #333;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 20px 0;
+    text-align: left;
+}
+
+.release-notes ul {
+    list-style: none;
+    font-size: 13px;
+    color: #ddd;
+    line-height: 1.6;
+}
+
+.modal-buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}

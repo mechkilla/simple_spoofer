@@ -1,0 +1,30 @@
+{
+  "name": "simple-spoofer",
+  "version": "2.0.0",
+  "description": "GPS Spoofer by French-Studio",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --win"
+  },
+  "author": "French-Studio",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^29.0.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.frenchstudio.simplespoofer",
+    "productName": "SIMPLE SPOOFER",
+    "win": {
+      "target": "nsis",
+      "icon": "icon.ico" 
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon": "icon.ico",
+      "uninstallerIcon": "uninstall.ico"
+    }
+  }
+}

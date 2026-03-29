@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>SIMPLE SPOOFER - French-Studio</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <div id="sidebar">
+        <div class="header">
+            <h1>🛸 SIMPLE <span>SPOOFER</span></h1>
+            <p>By French-Studio</p>
+        </div>
+
+        <div class="controls">
+            <button class="btn" id="btnConnect">🔌 Connecter l'iPhone</button>
+            
+            <div class="mode-selector">
+                <button class="btn-mode active" id="btnModeClassic" title="Téléportation simple">📍 Classique</button>
+                <button class="btn-mode" id="btnModeRoute" title="Trajet automatique">🛣️ Trajet</button>
+                <button class="btn-mode" id="btnModeJoystick" title="Contrôle au clavier">🕹️ Joystick</button>
+            </div>
+
+            <div class="panel" id="panelFavorites">
+                <label>⭐ MES FAVORIS</label>
+                <div class="favorites-list" id="favoritesList">
+                    </div>
+                <button class="btn" id="btnAddFav" style="margin-top: 10px; padding: 10px; font-size: 12px; background: #2ecc71;">➕ Ajouter position actuelle</button>
+            </div>
+
+            <div class="panel" id="panelRoute" style="display: none;">
+                <label>VITESSE : <span id="speedValue" style="color: var(--fs-accent-gold); font-size: 14px;">🚴 15 km/h</span></label>
+                <div class="slider-container">
+                    <input type="range" id="speedSlider" min="1" max="150" value="15" class="fs-slider">
+                </div>
+
+                <button class="btn" id="btnStartRoute" style="margin-top: 15px; background: #c5a059;">▶️ Démarrer Trajet</button>
+                <button class="btn btn-red" id="btnClearRoute" style="margin-top: 10px; padding: 10px; font-size: 12px;">🗑️ Annuler</button>
+            </div>
+
+            <div class="panel" id="panelJoystick" style="display: none;">
+                <label>VITESSE : <span id="speedValueJoy" style="color: var(--fs-accent-gold); font-size: 14px;">🚶 5 km/h</span></label>
+                <div class="slider-container">
+                    <input type="range" id="speedSliderJoy" min="1" max="150" value="5" class="fs-slider">
+                </div>
+                <div class="joystick-info">
+                    <p>Utilisez les touches <b>Z Q S D</b> ou les <b>Flèches</b> du clavier pour vous déplacer en temps réel.</p>
+                </div>
+            </div>
+
+            <button class="btn btn-red" id="btnReset">🏠 Retour à la réalité</button>
+
+            <div class="terminal" id="terminal">
+                <span class="terminal-prefix">></span> Initialisation Moteur V6...<br>
+                <span class="terminal-prefix">></span> Mode: Téléportation Classique.
+            </div>
+        </div>
+    </div>
+
+    <div id="map-container">
+        <div class="search-box">
+            <input type="text" placeholder="Rechercher une ville, une adresse..." id="searchInput" />
+            <button id="searchBtn">🔍</button>
+        </div>
+        <div id="map"></div>
+    </div>
+
+    <div id="updateModal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <h2>🚀 NOUVELLE MISE À JOUR</h2>
+            <p>La version <span id="newVersionNumber" style="color: var(--fs-accent-gold); font-weight: bold;">v2.0.0</span> est disponible !</p>
+            
+            <div class="release-notes">
+                <p style="color: var(--fs-text-muted); font-size: 11px; margin-bottom: 5px; text-transform: uppercase;">Nouveautés :</p>
+                <ul>
+                    <li>✔️ Mode Joystick (Contrôle au clavier)</li>
+                </ul>
+            </div>
+
+            <div class="modal-buttons">
+                <button class="btn" id="btnDownloadUpdate">Télécharger la mise à jour</button>
+                <button class="btn" id="btnCloseUpdate" style="background: transparent; border: 1px solid #444; margin-top: 10px;">Plus tard</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
