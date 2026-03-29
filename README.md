@@ -1,7 +1,7 @@
 # 🛸 SIMPLE SPOOFER - by French-Studio
 
-![Version](https://img.shields.io/badge/Version-2.0.0-blue.svg)
-![Engine](https://img.shields.io/badge/Engine-7.0-red.svg)
+![Version](https://img.shields.io/badge/Version-2.5.0-blue.svg)
+![Engine](https://img.shields.io/badge/Engine-7.2-red.svg)
 ![Plateforme](https://img.shields.io/badge/Plateforme-Windows-lightgrey.svg)
 ![Licence](https://img.shields.io/badge/Licence-MIT-green.svg)
 ![iPhone](https://img.shields.io/badge/Compatible-iPhone_%26_iPad-black?logo=apple)
